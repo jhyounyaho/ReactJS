@@ -39,8 +39,15 @@ class Main extends React.Component {
     handleSearch = async() => {
         try {
             const { value } = this.state
+            const chk_value = /^[0-9]+$/
             if (value === 0) {
-                alert('다른 숫자를 입력해주세요.')
+                alert('다른 번호를 입력해주세요.')
+                return false
+            } else if (value.length < 1) {
+                alert('ID 번호를 입력해주세요.')
+                return false
+            } else if (!chk_value.test(value)) {
+                alert('숫자만 입력해주세요.')
                 return false
             }
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
